@@ -1,5 +1,9 @@
+import Header from "./Header";
+
 function App() {
-  return <>Hello Atlas</>;
+  return (
+    <Header />
+  );
 }
 
 export default App;
