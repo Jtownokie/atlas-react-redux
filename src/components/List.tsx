@@ -3,14 +3,15 @@ import DeleteListButton from "./DeleteListButton";
 import Card from "./Card";
 import NewCardForm from "./NewCardForm";
 
-export default function List() {
+type ListPropTypes = {
+  title: string;
+}
+
+export default function List({title}:ListPropTypes) {
   return (
     <div className="group/list h-full min-w-96 p-4">
       <DeleteListButton />
-      <h3>To Do</h3>
-      <Card />
-      <Card />
-      <Card />
+      <h3>{title}</h3>
       <NewCardForm />
     </div>
   );
