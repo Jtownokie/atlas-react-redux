@@ -1,8 +1,14 @@
 import Header from "./Header";
+import Footer from "./Footer";
+import DeleteListButton from "./DeleteListButton";
 
 function App() {
   return (
-    <Header />
+    <div>
+      <Header />
+      <DeleteListButton />
+      <Footer />
+    </div>
   );
 }
 
