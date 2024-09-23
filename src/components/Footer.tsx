@@ -1,11 +1,28 @@
 // Footer Component
+import { useAppDispatch } from "../store";
+import { addList } from "../slices/listsSlice";
 
 export default function Footer() {
+  const dispatch = useAppDispatch();
+
+  const handleNewList = (title: string) => {
+    if (title !== "") {
+      dispatch(addList(title));
+    }
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const titleInput = (event.target as HTMLFormElement).elements.namedItem("title") as HTMLInputElement;
+    const title = titleInput.value;
+    handleNewList(title);
+  };
+
   return (
     <footer
       className="sticky bottom-0 left-0 flex w-screen items-center justify-center space-x-8 border-t-2 border-blue bg-off-white-light p-8"
     >
-      <form onSubmit={() => alert('Create list')}>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="List title"

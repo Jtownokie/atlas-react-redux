@@ -1,6 +1,7 @@
 // Board Component
 import List from "./List";
 import { useAppSelector } from "../store";
+import { useState } from "react"; // Do I need useState?
 
 export default function Board() {
   const lists = useAppSelector((state) => state.toDoList.lists);
