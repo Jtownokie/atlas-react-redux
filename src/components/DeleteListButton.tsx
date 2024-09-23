@@ -1,8 +1,22 @@
 // Delete List Button Component
+import { useAppDispatch } from "../store";
+import { deleteList } from "../slices/listsSlice";
 
-export default function DeleteListButton() {
+export type DeleteButtonProps = {
+  id: number;
+};
+
+export default function DeleteListButton({id}:DeleteButtonProps) {
+  const dispatch = useAppDispatch();
+
+  const handleDelete = (id: number) => {
+    if (id !== null) {
+      dispatch(deleteList(id));
+    }
+  }
+
   return (
-    <button className="h-[30px]" onClick={() => alert('Delete list')}>
+    <button className="h-[30px]" onClick={() => handleDelete(id)}>
       <svg
         className="hidden h-[30px] w-[30px] cursor-pointer group-hover/list:block"
         xmlns="http://www.w3.org/2000/svg"

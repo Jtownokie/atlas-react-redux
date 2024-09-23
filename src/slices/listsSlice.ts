@@ -17,9 +17,12 @@ export const listSlice = createSlice({
         cards: [],
       });
     },
+    deleteList: (state, action: PayloadAction<number>) => {
+      state.lists = state.lists.filter(list => list.id !== action.payload);
+    },
   },
 });
 
 export default listSlice.reducer;
 
-export const { addList } = listSlice.actions;
+export const { addList, deleteList } = listSlice.actions;
