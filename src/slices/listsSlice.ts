@@ -12,7 +12,7 @@ export const listSlice = createSlice({
   reducers: {
     addList: (state, action: PayloadAction<string>) => {
       state.lists.push({
-        id: state.lists[state.lists.length - 1].id + 1,
+        id: state.lists.length < 1 ? 1 : state.lists[state.lists.length - 1].id + 1,
         title: action.payload,
         cards: [],
       });
