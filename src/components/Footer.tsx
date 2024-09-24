@@ -1,6 +1,6 @@
 // Footer Component
 import { useAppDispatch } from "../store";
-import { addList } from "../slices/listsSlice";
+import { addList, clearLists } from "../slices/listsSlice";
 
 export default function Footer() {
   const dispatch = useAppDispatch();
@@ -16,6 +16,10 @@ export default function Footer() {
     const titleInput = (event.target as HTMLFormElement).elements.namedItem("title") as HTMLInputElement;
     const title = titleInput.value;
     handleNewList(title);
+  };
+
+  const handleClear = () => {
+    dispatch(clearLists());
   };
 
   return (
@@ -36,7 +40,7 @@ export default function Footer() {
           Save
         </button>
         <button
-          onClick={() => alert('Clear board')}
+          onClick={handleClear}
           type="button"
           className="rounded bg-teal px-6 py-4 ml-1 text-xl font-semibold text-off-white-light"
         >

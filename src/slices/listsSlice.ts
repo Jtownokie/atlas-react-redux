@@ -20,9 +20,12 @@ export const listSlice = createSlice({
     deleteList: (state, action: PayloadAction<number>) => {
       state.lists = state.lists.filter(list => list.id !== action.payload);
     },
+    clearLists: (state) => {
+      state.lists = [];
+    }
   },
 });
 
 export default listSlice.reducer;
 
-export const { addList, deleteList } = listSlice.actions;
+export const { addList, deleteList, clearLists } = listSlice.actions;
