@@ -3,20 +3,20 @@ import { useAppDispatch } from "../store";
 import { deleteList } from "../slices/listsSlice";
 
 export type DeleteButtonProps = {
-  id: number;
+  listId: number;
 };
 
-export default function DeleteListButton({id}:DeleteButtonProps) {
+export default function DeleteListButton({listId}:DeleteButtonProps) {
   const dispatch = useAppDispatch();
 
-  const handleDelete = (id: number) => {
-    if (id !== null) {
-      dispatch(deleteList(id));
+  const handleDelete = (listId: number) => {
+    if (listId !== null) {
+      dispatch(deleteList(listId));
     }
   }
 
   return (
-    <button className="h-[30px]" onClick={() => handleDelete(id)}>
+    <button className="h-[30px]" onClick={() => handleDelete(listId)}>
       <svg
         className="hidden h-[30px] w-[30px] cursor-pointer group-hover/list:block"
         xmlns="http://www.w3.org/2000/svg"

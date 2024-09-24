@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import toDoListReducer from "./slices/listsSlice";
+import cardsListReducer from "./slices/cardsSlice";
 
 export const store = configureStore({
   reducer: {
     toDoList: toDoListReducer,
+    cardsList: cardsListReducer
   },
 });
 

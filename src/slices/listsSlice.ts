@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
   lists: [
-    { id: 1, title: "To-Do", cards: [] },
+    { id: 1, title: "To-Do", cards: [1, 2] },
   ],
 };
 
@@ -22,10 +22,17 @@ export const listSlice = createSlice({
     },
     clearLists: (state) => {
       state.lists = [];
-    }
+    },
+    updateList: (state, action: PayloadAction<{listId: number, newCardId: number}>) => {
+      state.lists.map((list) => {
+        if (list.id === action.payload.listId) {
+          list.cards.push(action.payload.newCardId);
+        }
+      });
+    },
   },
 });
 
 export default listSlice.reducer;
 
-export const { addList, deleteList, clearLists } = listSlice.actions;
+export const { addList, deleteList, clearLists, updateList } = listSlice.actions;

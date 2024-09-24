@@ -1,10 +1,42 @@
 // New Card Form Component
+import { useAppDispatch } from "../store";
+import { addCard } from "../slices/cardsSlice";
+import { updateList } from "../slices/listsSlice";
+import { useAppSelector } from "../store";
 
-export default function NewCardForm() {
+export type NewCardFormProps = {
+  listId: number;
+};
+
+export default function NewCardForm({listId}: NewCardFormProps) {
+  const cards = useAppSelector((state) => state.cardsList.cards);
+  const dispatch = useAppDispatch();
+
+  const handleNewCard = (title: string, description: string) => {
+    if (title !== "" && description !== "") {
+      const newCard = {
+        id: cards.length < 1 ? 1 : cards[cards.length - 1].id + 1,
+        title: title,
+        description: description,
+      };
+      dispatch(addCard(newCard));
+      dispatch(updateList({listId, newCardId: newCard.id}));
+    }
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const titleInput = (event.target as HTMLFormElement).elements.namedItem("title") as HTMLInputElement;
+    const descriptionInput = (event.target as HTMLFormElement).elements.namedItem("description") as HTMLInputElement;
+    const title = titleInput.value;
+    const description = descriptionInput.value;
+    handleNewCard(title, description);
+  };
+
   return (
     <div className="group/new-card m-3 flex h-44 w-full justify-center">
       <form
-        onSubmit={() => alert('Create card')}
+        onSubmit={handleSubmit}
         className="hidden min-h-24 w-full flex-col items-start rounded bg-off-white-light px-4 text-blue group-hover/new-card:flex"
       >
         <input

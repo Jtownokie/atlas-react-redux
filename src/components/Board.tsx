@@ -10,7 +10,7 @@ export default function Board() {
     <div className="m-auto h-screen w-screen overflow-x-scroll text-center">
       <div className="flex h-full space-x-4">
         {lists.map((list, index) => (
-          <List id={list.id} title={list.title} key={index} />
+          <List listId={list.id} title={list.title} key={index} />
         ))}
       </div>
     </div>
