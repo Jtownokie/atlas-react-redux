@@ -1,14 +1,28 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
+import { persistReducer, persistStore } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import toDoListReducer from "./slices/listsSlice";
 import cardsListReducer from "./slices/cardsSlice";
 
+const persistedToDoList = persistReducer(
+  { key: "toDoList", storage },
+  toDoListReducer
+);
+
+const persistedCardsList = persistReducer(
+  { key: "cardsList", storage },
+  cardsListReducer
+);
+
 export const store = configureStore({
   reducer: {
-    toDoList: toDoListReducer,
-    cardsList: cardsListReducer
+    toDoList: persistedToDoList,
+    cardsList: persistedCardsList
   },
 });
+
+export const persistor = persistStore(store);
 
 // These types are helpful for the typescript autocomplete
 export type RootState = ReturnType<typeof store.getState>;
