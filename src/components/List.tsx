@@ -3,6 +3,7 @@ import DeleteListButton from "./DeleteListButton";
 import Card from "./Card";
 import NewCardForm from "./NewCardForm";
 import { useAppSelector } from "../store";
+import { useDroppable } from "@dnd-kit/core";
 
 export type ListPropTypes = {
   listId: number;
@@ -15,8 +16,12 @@ export default function List({listId, title}:ListPropTypes) {
   const cards = useAppSelector((state) => state.cardsList.cards);
   const currentCards = cards.filter(card => currentList.cards.includes(card.id));
 
+  const {setNodeRef} = useDroppable({
+    id: `${listId}`,
+  });
+
   return (
-    <div className="group/list h-full min-w-96 p-4">
+    <div className="group/list h-full min-w-96 p-4" ref={setNodeRef}>
       <DeleteListButton listId={listId} />
       <h3>{title}</h3>
       {currentCards.map((card, index) => (

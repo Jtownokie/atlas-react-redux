@@ -24,17 +24,21 @@ export const listSlice = createSlice({
       state.lists = [];
     },
     addCardToList: (state, action: PayloadAction<{listId: number, newCardId: number}>) => {
-      state.lists.map((list) => {
+      state.lists.forEach((list) => {
         if (list.id === action.payload.listId) {
           list.cards.push(action.payload.newCardId);
         }
       });
     },
     removeCardFromList: (state, action: PayloadAction<{listId: number, cardId: number}>) => {
-      state.lists.map((list) => {
+      state.lists = state.lists.map(list => {
         if (list.id === action.payload.listId) {
-          list.cards.filter(card => card !== action.payload.cardId);
+          return {
+            ...list,
+            cards: list.cards.filter(card => card !== action.payload.cardId),
+          };
         }
+        return list;
       });
     },
   },
