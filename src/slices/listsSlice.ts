@@ -23,10 +23,17 @@ export const listSlice = createSlice({
     clearLists: (state) => {
       state.lists = [];
     },
-    updateList: (state, action: PayloadAction<{listId: number, newCardId: number}>) => {
+    addCardToList: (state, action: PayloadAction<{listId: number, newCardId: number}>) => {
       state.lists.map((list) => {
         if (list.id === action.payload.listId) {
           list.cards.push(action.payload.newCardId);
+        }
+      });
+    },
+    removeCardFromList: (state, action: PayloadAction<{listId: number, cardId: number}>) => {
+      state.lists.map((list) => {
+        if (list.id === action.payload.listId) {
+          list.cards.filter(card => card !== action.payload.cardId);
         }
       });
     },
@@ -35,4 +42,4 @@ export const listSlice = createSlice({
 
 export default listSlice.reducer;
 
-export const { addList, deleteList, clearLists, updateList } = listSlice.actions;
+export const { addList, deleteList, clearLists, addCardToList, removeCardFromList } = listSlice.actions;

@@ -1,10 +1,29 @@
 // Delete Card Button Component
+import { useAppDispatch } from "../store";
+import { useAppSelector } from "../store";
+import { deleteCard } from "../slices/cardsSlice";
+import { removeCardFromList } from "../slices/listsSlice";
 
-export default function DeleteCardButton() {
+export type DeleteCardProps = {
+  cardId: number;
+};
+
+export default function DeleteCardButton({cardId}: DeleteCardProps) {
+  const dispatch = useAppDispatch();
+  const lists = useAppSelector((state) => state.toDoList.lists);
+  const currentList = lists.filter(list => list.cards.includes(cardId))[0];
+
+  const handleDelete = (cardId: number) => {
+    if (cardId !== null) {
+      dispatch(deleteCard(cardId));
+      dispatch(removeCardFromList({listId: currentList.id, cardId}));
+    }
+  }
+
   return (
     <button
       className="hidden group-hover/card:block"
-      onClick={() => alert('Delete card')}
+      onClick={() => handleDelete(cardId)}
     >
       <svg
         className="h-[20px] w-[20px]"

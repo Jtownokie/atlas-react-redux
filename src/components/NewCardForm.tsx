@@ -1,7 +1,7 @@
 // New Card Form Component
 import { useAppDispatch } from "../store";
 import { addCard } from "../slices/cardsSlice";
-import { updateList } from "../slices/listsSlice";
+import { addCardToList } from "../slices/listsSlice";
 import { useAppSelector } from "../store";
 
 export type NewCardFormProps = {
@@ -20,7 +20,7 @@ export default function NewCardForm({listId}: NewCardFormProps) {
         description: description,
       };
       dispatch(addCard(newCard));
-      dispatch(updateList({listId, newCardId: newCard.id}));
+      dispatch(addCardToList({listId, newCardId: newCard.id}));
     }
   };
 

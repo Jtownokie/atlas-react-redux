@@ -1,16 +1,23 @@
 // Delete List Button Component
-import { useAppDispatch } from "../store";
+import { useAppDispatch, useAppSelector } from "../store";
 import { deleteList } from "../slices/listsSlice";
+import { deleteCard } from "../slices/cardsSlice";
 
 export type DeleteButtonProps = {
   listId: number;
 };
 
 export default function DeleteListButton({listId}:DeleteButtonProps) {
+  const lists = useAppSelector((state) => state.toDoList.lists);
   const dispatch = useAppDispatch();
 
   const handleDelete = (listId: number) => {
     if (listId !== null) {
+      const currentList = lists.filter(list => list.id === listId)[0];
+      const currentCards = currentList.cards;
+      currentCards.map((cardId) => {
+        dispatch(deleteCard(cardId));
+      });
       dispatch(deleteList(listId));
     }
   }

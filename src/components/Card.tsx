@@ -16,7 +16,7 @@ export default function Card({cardId, title, description}: CardPropTypes) {
         className="my-2 flex w-full items-end justify-between text-xl font-black"
       >
         <span>{title}</span>
-        <DeleteCardButton />
+        <DeleteCardButton cardId={cardId} />
       </h5>
       <p className="mt-0 text-left">
         {description}

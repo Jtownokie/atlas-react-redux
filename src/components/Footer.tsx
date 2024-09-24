@@ -1,6 +1,7 @@
 // Footer Component
 import { useAppDispatch } from "../store";
 import { addList, clearLists } from "../slices/listsSlice";
+import { clearCards } from "../slices/cardsSlice";
 
 export default function Footer() {
   const dispatch = useAppDispatch();
@@ -20,6 +21,7 @@ export default function Footer() {
 
   const handleClear = () => {
     dispatch(clearLists());
+    dispatch(clearCards());
   };
 
   return (
