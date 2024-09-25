@@ -1,13 +1,20 @@
 // Board Component
 import List from "./List";
 import { useAppSelector, useAppDispatch } from "../store";
-import { useState } from "react"; // Do I need useState?
-import { DndContext } from '@dnd-kit/core';
+import { DndContext, useSensors, useSensor, PointerSensor } from '@dnd-kit/core';
 import { removeCardFromList, addCardToList } from "../slices/listsSlice";
 
 export default function Board() {
   const dispatch = useAppDispatch();
   const lists = useAppSelector((state) => state.toDoList.lists);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      }
+    })
+  );
 
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
@@ -25,7 +32,7 @@ export default function Board() {
   };
 
   return (
-    <DndContext onDragEnd={handleDragEnd}>
+    <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
       <div className="m-auto h-screen w-screen overflow-x-scroll text-center">
         <div className="flex h-full space-x-4">
           {lists.map((list, index) => (
