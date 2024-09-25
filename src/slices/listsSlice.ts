@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
   lists: [
-    { id: 1, title: "To-Do", cards: [1, 2] },
+    { id: 1, title: "To-Do", cards: [1, 2] }
   ],
 };
 

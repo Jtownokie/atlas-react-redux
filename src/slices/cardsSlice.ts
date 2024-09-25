@@ -4,7 +4,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 const initialState = {
   cards: [
     { id: 1, title: "Title", description: "Description" },
-    { id: 2, title: "Title", description: "Description" },
+    { id: 2, title: "Title", description: "Description" }
   ],
 };
 
